@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GARE Found Match🧐</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <h2 class="text-center mb-5">Matched Agencies</h2>
+        <div class="list-group">
+            {% for agency in recommendations %}
+                <div class="list-group-item bg-white mb-3 rounded shadow-sm">
+                    <h4 class="mb-2">{{ agency.Name }}</h4>
+                    <p class="mb-1"><strong>Tagline:</strong> {{ agency.Tagline }}</p>
+                    <p class="mb-1"><strong>Ratings:</strong> {{ agency.Ratings }}</p>
+                    <p class="mb-1"><strong>Reviews:</strong> {{ agency.Reviews }}</p>
+                    <p class="mb-1"><strong>Sponsor:</strong> {{ agency.Sponsor }}</p>
+                    <p class="mb-1"><strong>MinProjectSize:</strong> {{ agency.MinProjectSize }}</p>
+                    <p class="mb-1"><strong>HourlyRate:</strong> {{ agency.HourlyRate }}</p>
+                    <p class="mb-1"><strong>Service:</strong> {{ agency.Service }}</p>
+                    <p class="mb-1"><strong>Location:</strong> {{ agency.City }}, {{ agency.Country_State }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

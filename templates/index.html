@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GARE For U</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <h2 class="text-center mb-5" style="font-size:40px">&#128221;</h2>
+        <form action="/" method="post" class="bg-white p-5 rounded shadow">
+            
+            <!-- Type of Project Autocomplete Dropdown -->
+            <div class="mb-3">
+                <label for="type_of_project" class="form-label">Type of Project</label>
+                <input list="project-types" name="type_of_project" class="form-control" placeholder="Enter type of project">
+                <datalist id="project-types">
+                    <option value="Web Design">
+                    <option value="UX Design">
+                    <option value="Product Design">
+                    <option value="Print Design">
+                    <option value="Design">
+                    <option value="Digital Design">
+                    <option value="Graphic Designers">
+                    <option value="Interior Design">
+                    <option value="Logo Designers">
+                    <option value="Packaging Design">
+                    <option value="UX Design">
+                    <!-- Add more options as needed -->
+                </datalist>
+            </div>
+
+            <!-- Location Autocomplete Dropdown -->
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input list="locations" id="location" name="location" class="form-control" placeholder="Enter location">
+                <datalist id="locations">
+                    <!-- Options will be populated dynamically here -->
+                </datalist>
+            </div>
+
+
+            <!-- Ratings Autocomplete Dropdown -->
+            <div class="mb-3">
+                <label for="ratings" class="form-label">Ratings</label>
+                <input list="rating-values" name="ratings" class="form-control" placeholder="Enter ratings">
+                <datalist id="rating-values">
+                    <option value="5">
+                    <option value="4.5">
+                    <option value="4">
+                    <option value="3.5">
+                    <option value="3">
+                    <option value="2">
+                    <option value="1">
+                    <!-- Add more options as needed -->
+                </datalist>
+            </div>
+
+            <!-- Budget RANGE-->
+            <div class="mb-3">
+                <label for="budget" class="form-label">Budget ($)</label>
+                <input type="number" name="budget" class="form-control" placeholder="Enter budget">
+            </div>
+
+             <!-- Company Size RANGE-->
+            <div class="mb-3">
+                <label for="size" class="form-label">Company Size</label>
+                <input type="number" name="size" class="form-control" placeholder="Enter company size">
+            </div>
+
+            <!-- Time-Range WEEKS-RANGE-->
+            <div class="mb-3">
+                <label for="timeline" class="form-label">Timeline</label>
+                <input type="number" name="timeline" class="form-control" placeholder="Enter timeline">
+            </div>
+
+            <!-- Experience RANGE-->
+            <div class="mb-3">
+                <label for="experience" class="form-label">Experience</label>
+                <input type="number" name="experience" class="form-control" placeholder="Enter experience">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Let's Find Match 🧐</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script>
+    function updateBudgetValue() {
+        const budgetRange = document.getElementById("budget-range");
+        const budgetValue = document.getElementById("budget-value");
+        budgetValue.innerText = budgetRange.value;
+    }
+
+    function updateSizeValue() {
+        const sizeRange = document.getElementById("size-range");
+        const sizeValue = document.getElementById("size-value");
+        sizeValue.innerText = sizeRange.value;
+    }
+
+    function updateTimelineValue() {
+        const timelineRange = document.getElementById("timeline-range");
+        const timelineValue = document.getElementById("timeline-value");
+        timelineValue.innerText = timelineRange.value;
+    }
+
+    function updateExperienceValue() {
+        const experienceRange = document.getElementById("experience-range");
+        const experienceValue = document.getElementById("experience-value");
+        experienceValue.innerText = experienceRange.value;
+    }
+</script>
+<script>
+$(document).ready(function() {
+    $("#location").on('input', function() {
+        let query = $(this).val();
+        if (query.length > 2) {
+            $.get("/search_location", { q: query }, function(data) {
+                let dataList = $("#locations");
+                dataList.empty();  // Clear previous options
+                data.forEach(function(city) {
+                    dataList.append($("<option>").val(city));
+                });
+            });
+        }
+    });
+});
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
